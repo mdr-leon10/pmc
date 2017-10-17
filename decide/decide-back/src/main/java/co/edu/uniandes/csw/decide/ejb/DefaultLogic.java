@@ -25,7 +25,7 @@ package co.edu.uniandes.csw.decide.ejb;
 
 
 
-import co.edu.uniandes.csw.decide.entities.DefaultEntity;
+import co.edu.uniandes.csw.decide.entities.PoliticoEntity;
 import co.edu.uniandes.csw.decide.exceptions.BusinessLogicException;
 
 import co.edu.uniandes.csw.decide.persistence.DefaultPersistence;
@@ -54,7 +54,7 @@ public class DefaultLogic {
      * @return
      * @throws BusinessLogicException
      */
-    public DefaultEntity createDefault(DefaultEntity entity) throws BusinessLogicException {
+    public PoliticoEntity createDefault(PoliticoEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de Default");
         // Invoca la persistencia para crear la Default
         persistence.create(entity);
@@ -68,10 +68,10 @@ public class DefaultLogic {
      *
      * @return una lista de Defaultes.
      */
-    public List<DefaultEntity> getDefaults() {
+    public List<PoliticoEntity> getDefaults() {
         LOGGER.info("Inicia proceso de consultar todas las Defaultes");
         // Note que, por medio de la inyección de dependencias se llama al método "findAll()" que se encuentra en la persistencia.
-        List<DefaultEntity> Default = persistence.findAll();
+        List<PoliticoEntity> Default = persistence.findAll();
         LOGGER.info("Termina proceso de consultar todas las Defaultes");
         return Default;
     }

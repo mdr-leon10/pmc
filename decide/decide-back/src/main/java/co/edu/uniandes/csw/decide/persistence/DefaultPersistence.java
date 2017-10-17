@@ -25,7 +25,7 @@ package co.edu.uniandes.csw.decide.persistence;
 
 
 
-import co.edu.uniandes.csw.decide.entities.DefaultEntity;
+import co.edu.uniandes.csw.decide.entities.PoliticoEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,7 +51,7 @@ public class DefaultPersistence {
      * @param entity objeto Default que se creará en la base de datos
      * @return devuelve la entidad creada con un id dado por la base de datos.
      */
-    public DefaultEntity create(DefaultEntity entity) {
+    public PoliticoEntity create(PoliticoEntity entity) {
         LOGGER.info("Creando un default nuevo");
         /* Note que hacemos uso de un método propio de EntityManager para persistir la Default en la base de datos.
         Es similar a "INSERT INTO table_codigo (column1, column2, column3, ...) VALUES (value1, value2, value3, ...);" en SQL.
@@ -68,7 +68,7 @@ public class DefaultPersistence {
      * el codigo pudo cambiar. En ese caso, se haria uso del método update.
      * @return un default con los cambios aplicados.
      */
-    public DefaultEntity update(DefaultEntity entity) {
+    public PoliticoEntity update(PoliticoEntity entity) {
         LOGGER.log(Level.INFO, "Actualizando Default con id={0}", entity.getId());
         /* Note que hacemos uso de un método propio del EntityManager llamado merge() que recibe como argumento
         la Default con los cambios, esto es similar a 
@@ -86,11 +86,11 @@ public class DefaultPersistence {
      */
     public void delete(Long id) {
         LOGGER.log(Level.INFO, "Borrando Default con id={0}", id);
-        // Se hace uso de mismo método que esta explicado en public DefaultEntity find(Long id) para obtener la Default a borrar.
-        DefaultEntity entity = em.find(DefaultEntity.class, id);
+        // Se hace uso de mismo método que esta explicado en public PoliticoEntity find(Long id) para obtener la Default a borrar.
+        PoliticoEntity entity = em.find(PoliticoEntity.class, id);
         /* Note que una vez obtenido el objeto desde la base de datos llamado "entity", volvemos hacer uso de un método propio del
          EntityManager para eliminar de la base de datos el objeto que encontramos y queremos borrar.
-         Es similar a "delete from DefaultEntity where id=id;" - "DELETE FROM table_codigo WHERE condition;" en SQL.*/
+         Es similar a "delete from PoliticoEntity where id=id;" - "DELETE FROM table_codigo WHERE condition;" en SQL.*/
         em.remove(entity);
     }
 
@@ -100,26 +100,26 @@ public class DefaultPersistence {
      * @param id: id correspondiente a la Default buscada.
      * @return un default.
      */
-    public DefaultEntity find(Long id) {
+    public PoliticoEntity find(Long id) {
         LOGGER.log(Level.INFO, "Consultando Default con id={0}", id);
         /* Note que se hace uso del metodo "find" propio del EntityManager, el cual recibe como argumento 
         el tipo de la clase y el objeto que nos hara el filtro en la base de datos en este caso el "id"
-        Suponga que es algo similar a "select * from DefaultEntity where id=id;" - "SELECT * FROM table_codigo WHERE condition;" en SQL.
+        Suponga que es algo similar a "select * from PoliticoEntity where id=id;" - "SELECT * FROM table_codigo WHERE condition;" en SQL.
          */
-        return em.find(DefaultEntity.class, id);
+        return em.find(PoliticoEntity.class, id);
     }
 
     /**
      * Devuelve todas las Default de la base de datos.
      *
      * @return una lista con todas las Default que encuentre en la base de
-     * datos, "select u from DefaultEntity u" es como un "select * from
-     * DefaultEntity;" - "SELECT * FROM table_codigo" en SQL.
+ datos, "select u from PoliticoEntity u" es como un "select * from
+ PoliticoEntity;" - "SELECT * FROM table_codigo" en SQL.
      */
-    public List<DefaultEntity> findAll() {
+    public List<PoliticoEntity> findAll() {
         LOGGER.info("Consultando todas las Default");
         // Se crea un query para buscar todas las Default en la base de datos.
-        TypedQuery query = em.createQuery("select u from DefaultEntity u", DefaultEntity.class);
+        TypedQuery query = em.createQuery("select u from DefaultEntity u", PoliticoEntity.class);
         // Note que en el query se hace uso del método getResultList() que obtiene una lista de Default.
         return query.getResultList();
     }
