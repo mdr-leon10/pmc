@@ -51,6 +51,7 @@ public class CargoLogic {
 		{
 			return cargo;
 		}
+                else
 		throw new BusinessLogicException( String.format( "No existe el cargo con el id %s", id ));
 	}
     

@@ -71,7 +71,7 @@ public class CargoPersistence {
 
     public CargoEntity findByNameAndEntidad(CargoEntity cargo) {
         
-        TypedQuery query = em.createQuery("select u from CargoEntity u where u.nombre = nombreCargo and u.entidad = entidadCargo", CargoEntity.class);
+        TypedQuery query = em.createQuery("select u from CargoEntity u where u.name = nombreCargo and u.entidad = entidadCargo", CargoEntity.class);
         query.setParameter("nombreCargo", cargo.getName());
         query.setParameter("entidadCargo", cargo.getEntidad());
         return (CargoEntity) query.getSingleResult();

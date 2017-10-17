@@ -6,11 +6,25 @@
 package co.edu.uniandes.csw.decide.entities;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
 
 /**
  *
  * @author mdr.leon10
  */
-public class IdiomaEntity extends BaseEntity implements Serializable {
+@Entity
+public class IdiomaEntity extends BaseEntity implements Serializable 
+{
+    private String nivel;
+
+    public String getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(String nivel) {
+        this.nivel = nivel;
+    }
+    
+    
     
 }
