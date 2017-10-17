@@ -21,7 +21,7 @@ public class IdiomaPersistence {
     protected EntityManager em;
     
     /**
-     * @param entity objeto cargo que se creará en la base de datos
+     * @param entity objeto idioma que se creará en la base de datos
      * @return devuelve la entidad creada con un id dado por la base de datos.
      */
     public IdiomaEntity create(IdiomaEntity entity) {

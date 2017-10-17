@@ -24,7 +24,5 @@ public class IdiomaEntity extends BaseEntity implements Serializable
     public void setNivel(String nivel) {
         this.nivel = nivel;
     }
-    
-    
-    
+   
 }

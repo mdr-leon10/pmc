@@ -6,11 +6,25 @@
 package co.edu.uniandes.csw.decide.entities;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
 
 /**
  *
  * @author mdr.leon10
  */
+@Entity
 public class TemaEntity extends BaseEntity implements Serializable {
+    
+    private String descripcion;
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
+    
     
 }

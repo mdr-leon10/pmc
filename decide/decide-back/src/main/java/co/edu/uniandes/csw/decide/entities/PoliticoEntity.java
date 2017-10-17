@@ -34,6 +34,13 @@ import javax.persistence.Entity;
 @Entity
 public class PoliticoEntity extends BaseEntity implements Serializable 
 {
-    
-   
+    private Long cedula;
+
+    public Long getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(Long cedula) {
+        this.cedula = cedula;
+    }
 }
