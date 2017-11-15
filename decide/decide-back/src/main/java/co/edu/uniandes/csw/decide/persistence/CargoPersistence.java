@@ -77,5 +77,9 @@ public class CargoPersistence {
         return (CargoEntity) query.getSingleResult();
         
     }
+
+    public CargoEntity find(Long idPolitico, Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

@@ -5,8 +5,11 @@
  */
 package co.edu.uniandes.csw.decide.resources;
 
+import co.edu.uniandes.csw.decide.dtos.PoliticoDTO;
 import co.edu.uniandes.csw.decide.dtos.TituloDTO;
+import co.edu.uniandes.csw.decide.ejb.PoliticoLogic;
 import co.edu.uniandes.csw.decide.ejb.TituloLogic;
+import co.edu.uniandes.csw.decide.entities.PoliticoEntity;
 import co.edu.uniandes.csw.decide.entities.TituloEntity;
 import co.edu.uniandes.csw.decide.exceptions.BusinessLogicException;
 import java.util.LinkedList;
@@ -34,13 +37,16 @@ import javax.ws.rs.core.Response;
  *
  * @author mdr.leon10
  */
-@Path( "/titulos" )
+
 @Consumes( MediaType.APPLICATION_JSON )
 @Produces( MediaType.APPLICATION_JSON )
 public class TituloResource {
     
     @Inject
     private TituloLogic logic;
+    
+    @Inject
+    private PoliticoLogic polLogic;
     
     @Context
     private HttpServletResponse response;
@@ -53,17 +59,16 @@ public class TituloResource {
 	 * @throws BusinessLogicException Si no cumple con los requisitos mínimos para su creación. (400 BAD REQUEST)
 	 */
 	@POST
-	public TituloDTO createTitulo( TituloDTO dto ) throws WebApplicationException
-	{
-            try
+        public TituloDTO createTitulo(@PathParam("idPolitico") Long idPolitico,TituloDTO dto) throws BusinessLogicException 
+        {
+            PoliticoEntity pol = polLogic.getPolitico(idPolitico);
+            if(pol==null)
             {
-                return new TituloDTO( logic.createTitulo( dto.toEntity( ) ) );
+                throw new WebApplicationException("El politico no existe", 404);
             }
-            catch (BusinessLogicException ex){
-                throw new WebApplicationException(ex.getMessage(), Response.Status.BAD_REQUEST);
-            }
-                    
-	}
+            dto.setPolitico(new PoliticoDTO(polLogic.getPolitico(idPolitico)));
+            return new TituloDTO(logic.createTitulo(dto.toEntity()));
+        }
 	
 	/**
 	 * Retorna los Titulos que hacen parte del Sistema
@@ -71,10 +76,16 @@ public class TituloResource {
 	 * @return Lista de DTO's con la información de los Titulos que hacen parte del sistema
 	 */
 	@GET
-	public List<TituloDTO> getTitulos( )
+	public List<TituloDTO> getTitulos( @PathParam("idPolitico") Long idPolitico ) throws BusinessLogicException
 	{
-		return listEntity2DTO( logic.getTitulos( ) );
+            PoliticoEntity pol = polLogic.getPolitico(idPolitico);
+            if (pol == null)
+            {
+                throw new WebApplicationException("El politico no existe",404);
+            }
+            return listEntity2DTO( logic.getTitulos(idPolitico) );
 	}
+ 
 	
 	/**
 	 * Retorna un Titulo cuyo id es dado por parámetro
@@ -83,17 +94,22 @@ public class TituloResource {
 	 * @return Titulo cuyo id coincide con el dado por parámetro
 	 * @throws BusinessLogicException Si el Titulo con el id dado, no existe en el sistema (404 NOT FOUND)
 	 */
-	@GET
-	@Path( "{id: \\d+}" )
-	public TituloDTO getTitulo( @PathParam( "id" ) Long id ) throws WebApplicationException
-	{
-            TituloEntity e = logic.getTitulo(id);
-            if (e == null)
-            {
-                throw new WebApplicationException("No se encontró un título con esa información" , Response.Status.NOT_FOUND);
-            }
-            return new TituloDTO( logic.getTitulo( id ) );
-	}
+    @GET
+    @Path("{id: \\d+}")
+    public TituloDTO getTitulo(@PathParam("idPolitico") Long idPolitico, @PathParam("id") Long id) throws BusinessLogicException
+    {   
+        PoliticoEntity guia = polLogic.getPolitico(idPolitico);
+        if(guia==null)
+        {
+            throw new WebApplicationException("El politico no existe", 404);
+        }
+        TituloEntity entity = logic.getTitulo(idPolitico, id);
+        if(entity==null)
+        {
+            throw new WebApplicationException("El titulo pedido no existe",404);
+        }  
+        return new TituloDTO(entity);
+    }
 	
 	/**
 	 * Actualiza un Titulo cuyo id es dado por parámetro
@@ -104,25 +120,22 @@ public class TituloResource {
 	 * @throws BusinessLogicException Si no cumple con los requisitos mínimos para su creación. (400 BAD REQUEST)
 	 */
 	@PUT
-	@Path( "{id: \\d+}" )
-	public TituloDTO updateTitulo( @PathParam( "id" ) Long id, TituloDTO dto ) throws WebApplicationException
-	{
-            if(logic.getTitulo(id) != null)
+        @Path("{id: \\d+}")
+        public TituloDTO updateTitulo(@PathParam("idPolitico") Long idPolitico, @PathParam("id") Long id, TituloDTO dto) throws BusinessLogicException
+        {  
+            PoliticoEntity pol = polLogic.getPolitico(idPolitico);
+            if(pol==null)
             {
-            TituloEntity entity = dto.toEntity();
-                try 
-                {
-                    return new TituloDTO (logic.updateTitulo( entity, id ));
-                } 
-                catch (BusinessLogicException ex) 
-                {
-                    throw new WebApplicationException(ex.getMessage(), Response.Status.METHOD_NOT_ALLOWED);
-                }
+                throw new WebApplicationException("El Politico no existe", 404);
             }
-            else
-                throw new WebApplicationException("No se puede actualizar un título que no existe", Response.Status.FORBIDDEN);
-            
-	}
+            TituloEntity entity = dto.toEntity();
+            TituloEntity result = logic.updateTitulo(entity, id);
+            if(result==null)
+            {
+                throw new WebApplicationException("El Titulo no existe",404);
+            }
+            return new TituloDTO(result);
+    }
 	
 	/**
 	 * Elimina un Titulo, del sistema, cuyo id es dado por parámetro
@@ -130,16 +143,16 @@ public class TituloResource {
 	 * @param id Id del Titulo a ser eliminado
 	 */
 	@DELETE
-	@Path( "{id: \\d+}" )
-	public void deleteTitulo( @PathParam( "id" ) Long id ) throws BusinessLogicException
-	{
-            if (logic.getTitulo(id) == null)
+        @Path("{id: \\d+}")
+        public void deleteTitulo(@PathParam("idPolitico") Long idPolitico,@PathParam("id") Long id) throws BusinessLogicException
+        {  
+            TituloEntity result = logic.getTitulo( idPolitico, id );
+            if(result==null)
             {
-                throw new WebApplicationException("No se puede eliminar un título que no existe", Response.Status.BAD_REQUEST);
+                 throw new WebApplicationException("La calificación no existe",404);
             }
-            else
-            logic.deleteTitulo( id );
-	}
+            logic.deleteTitulo( id,idPolitico );    
+        }
 	
 	/**
 	 * Método encargado de realizar la transformación de Entity a DTO

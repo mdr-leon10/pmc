@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.decide.ejb;
 
 import co.edu.uniandes.csw.decide.entities.InvestigacionEntity;
+import co.edu.uniandes.csw.decide.entities.PoliticoEntity;
 import co.edu.uniandes.csw.decide.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.decide.persistence.InvestigacionPersistence;
 import java.util.List;
@@ -19,6 +20,9 @@ public class InvestigacionLogic {
     
     @Inject
     private InvestigacionPersistence persistence;
+    
+    @Inject
+    private PoliticoLogic pol;
     
     /**
      *
@@ -40,13 +44,15 @@ public class InvestigacionLogic {
      * Obtener todos los Investigacions existentes en la base de datos.
      * @return una lista de Investigacions.
      */
-    public List<InvestigacionEntity> getInvestigacions() {
-        return persistence.findAll();
+   public List<InvestigacionEntity> getInvestigaciones(Long politicoId) throws BusinessLogicException
+    {
+            PoliticoEntity politico = pol.getPolitico(politicoId);
+            return politico.getInvestigaciones();    
     }
     
-    public InvestigacionEntity getInvestigacion( Long id ) throws BusinessLogicException
+    public InvestigacionEntity getInvestigacion( Long id, Long politicoId ) throws BusinessLogicException
 	{
-		InvestigacionEntity Investigacion = persistence.find( id );
+		InvestigacionEntity Investigacion = persistence.find( id, politicoId );
 		if( Investigacion != null )
 		{
 			return Investigacion;
@@ -68,14 +74,14 @@ public class InvestigacionLogic {
             return persistence.update(entity);
     }
             
-    public void deleteInvestigacion (Long Investigacion) throws BusinessLogicException
+    public void deleteInvestigacion (Long investigacion, Long politico) throws BusinessLogicException
     {
-        if (persistence.find(Investigacion) == null)
+        if (getInvestigacion(investigacion, politico) == null)
         {
             throw new BusinessLogicException("No se puede eliminar un Investigacion que no existe");
         }
         else 
-            persistence.delete(Investigacion);
+            persistence.delete(investigacion);
     }
     
 }

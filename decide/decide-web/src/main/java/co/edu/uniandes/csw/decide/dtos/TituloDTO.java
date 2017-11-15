@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.decide.dtos;
 
+import co.edu.uniandes.csw.decide.entities.PoliticoEntity;
 import co.edu.uniandes.csw.decide.entities.TituloEntity;
 
 /**
@@ -16,6 +17,7 @@ public class TituloDTO
     private Long id;
     private String name;
     private String universidad;
+    private PoliticoDTO politico;
 
     public TituloDTO() {
     }
@@ -24,6 +26,7 @@ public class TituloDTO
         this.id = e.getId();
         this.name = e.getName();
         this.universidad = e.getUniversidad();
+        this.politico = politicoEtoDTO(e.getPolitico());
     }
     
     public TituloEntity toEntity()
@@ -32,8 +35,24 @@ public class TituloDTO
         e.setId(this.id);
         e.setName(this.name);
         e.setUniversidad(this.universidad);
+        e.setPolitico(this.politico.toEntity());
+                
         
         return e;
+    }
+    
+    public PoliticoDTO politicoEtoDTO (PoliticoEntity entity)
+    {
+        PoliticoDTO pol = new PoliticoDTO(entity);
+        return pol;
+    }
+
+    public PoliticoDTO getPolitico() {
+        return politico;
+    }
+
+    public void setPolitico(PoliticoDTO politico) {
+        this.politico = politico;
     }
 
     public Long getId() {
@@ -59,6 +78,8 @@ public class TituloDTO
     public void setUniversidad(String universidad) {
         this.universidad = universidad;
     }
+
+
     
     
 }

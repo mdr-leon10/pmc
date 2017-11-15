@@ -35,91 +35,91 @@ public class PoliticoDetailDTO extends PoliticoDTO
         if(entity != null)
         {
             
-//            if(entity.getCargosRealizados() != null)
-//            {  
-//                cargos = new ArrayList<>();
-//                for (CargoEntity cargo : entity.getCargosRealizados()) 
-//                {
-//                    cargos.add(new CargoDTO(cargo));
-//                }
-//            }
+            if(entity.getCargosRealizados() != null)
+            {  
+                cargos = new ArrayList<>();
+                for (CargoEntity cargo : entity.getCargosRealizados()) 
+                {
+                    cargos.add(new CargoDTO(cargo));
+                }
+            }
             
-//            if(entity.getInvestigaciones()!= null)
-//            {
-//                investigaciones = new ArrayList<>();
-//                for (InvestigacionEntity investigacion : entity.getInvestigaciones()) {
-//                    investigaciones.add(new InvestigacionDTO(investigacion));
-//                }
-//            }
-//            
-//            
-//            if(entity.getTitulos() != null)
-//            {
-//                titulos = new ArrayList<>();
-//                for (TituloEntity titulo : entity.getTitulos()) 
-//                {
-//                    titulos.add(new TituloDTO(titulo));
-//                }
-//            }
-//            
-//            if(entity.getPropuestas() != null)
-//            {
-//                propuestas = new ArrayList<>();
-//                for (PropuestaEntity propuesta : entity.getPropuestas()) 
-//                {
-//                    propuestas.add(new PropuestaDTO(propuesta));
-//                }
-//            }
+            if(entity.getInvestigaciones()!= null)
+            {
+                investigaciones = new ArrayList<>();
+                for (InvestigacionEntity investigacion : entity.getInvestigaciones()) {
+                    investigaciones.add(new InvestigacionDTO(investigacion));
+                }
+            }
+            
+            
+            if(entity.getTitulos() != null)
+            {
+                titulos = new ArrayList<>();
+                for (TituloEntity titulo : entity.getTitulos()) 
+                {
+                    titulos.add(new TituloDTO(titulo));
+                }
+            }
+            
+            if(entity.getPropuestas() != null)
+            {
+                propuestas = new ArrayList<>();
+                for (PropuestaEntity propuesta : entity.getPropuestas()) 
+                {
+                    propuestas.add(new PropuestaDTO(propuesta));
+                }
+            }
         }
     }
     
     @Override
     public PoliticoEntity toEntity() 
     {
-//        PoliticoEntity entity = super.toEntity();
-//        
-//        if(this.getCargo() != null)
-//        {            
-//            List<CargoEntity> cargoE = new ArrayList<>( );
-//            for(CargoDTO cargo : this.getCargo())
-//            {
-//                cargoE.add(cargo.toEntity());
-//            }
-//            entity.setCargosRealizados(cargoE);
-//        }
+        PoliticoEntity entity = super.toEntity();
         
-//        if(this.getInvestigaciones() != null)
-//        {
-//            List<InvestigacionEntity> investigacionesE = new ArrayList<>( );
-//            for(InvestigacionDTO investigacion: this.getInvestigaciones())
-//            {
-//                investigacionesE.add(investigacion.toEntity());
-//            }
-//            entity.setInvestigaciones(investigacionesE);
-//        }
-//        
-//        if(this.getTitulo() != null)
-//        {
-//            List<TituloEntity> titulosE = new ArrayList<>( );
-//            for(TituloDTO titulo: this.getTitulo())
-//            {
-//                titulosE.add(titulo.toEntity());
-//            }
-//            entity.setTitulos(titulosE);
-//        }
-//        
-//        if(this.getPropuestas() != null)
-//        {
-//            List<PropuestaEntity> propuestasE = new ArrayList<>( );
-//            for(PropuestaDTO propuesta: this.getPropuestas())
-//            {
-//                propuestasE.add(propuesta.toEntity());
-//            }
-//            entity.setPropuestas(propuestasE);
-//        }
+        if(this.getCargo() != null)
+        {            
+            List<CargoEntity> cargoE = new ArrayList<>( );
+            for(CargoDTO cargo : this.getCargo())
+            {
+                cargoE.add(cargo.toEntity());
+            }
+            entity.setCargosRealizados(cargoE);
+        }
         
-        //return entity;
-        return null;
+        if(this.getInvestigaciones() != null)
+        {
+            List<InvestigacionEntity> investigacionesE = new ArrayList<>( );
+            for(InvestigacionDTO investigacion: this.getInvestigaciones())
+            {
+                investigacionesE.add(investigacion.toEntity());
+            }
+            entity.setInvestigaciones(investigacionesE);
+        }
+        
+        if(this.getTitulo() != null)
+        {
+            List<TituloEntity> titulosE = new ArrayList<>( );
+            for(TituloDTO titulo: this.getTitulo())
+            {
+                titulosE.add(titulo.toEntity());
+            }
+            entity.setTitulos(titulosE);
+        }
+        
+        if(this.getPropuestas() != null)
+        {
+            List<PropuestaEntity> propuestasE = new ArrayList<>( );
+            for(PropuestaDTO propuesta: this.getPropuestas())
+            {
+                propuestasE.add(propuesta.toEntity());
+            }
+            entity.setPropuestas(propuestasE);
+        }
+        
+        return entity;
+        
     }
 
     public List<CargoDTO> getCargo() {

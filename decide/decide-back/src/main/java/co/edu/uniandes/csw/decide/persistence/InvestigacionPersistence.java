@@ -72,5 +72,9 @@ public class InvestigacionPersistence {
         query.setParameter("investigacion", entity.getName());
         return (InvestigacionEntity) query.getSingleResult();
     }
+
+    public InvestigacionEntity find(Long id, Long politicoId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

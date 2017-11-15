@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.decide.ejb;
 
 import co.edu.uniandes.csw.decide.entities.CargoEntity;
+import co.edu.uniandes.csw.decide.entities.PoliticoEntity;
 import co.edu.uniandes.csw.decide.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.decide.persistence.CargoPersistence;
 import java.util.List;
@@ -19,6 +20,9 @@ public class CargoLogic {
     
     @Inject
     private CargoPersistence persistence;
+    
+    @Inject
+    private PoliticoLogic pol;
     
     /**
      *
@@ -40,13 +44,15 @@ public class CargoLogic {
      * Obtener todos los cargos existentes en la base de datos.
      * @return una lista de Cargos.
      */
-    public List<CargoEntity> getCargos() {
-        return persistence.findAll();
+    public List<CargoEntity> getCargos(Long politicoId) throws BusinessLogicException
+    {
+            PoliticoEntity politico = pol.getPolitico(politicoId);
+            return politico.getCargosRealizados();    
     }
     
-    public CargoEntity getCargo( Long id ) throws BusinessLogicException
+    public CargoEntity getCargo( Long idPolitico, Long id ) throws BusinessLogicException
 	{
-		CargoEntity cargo = persistence.find( id );
+		CargoEntity cargo = persistence.find( idPolitico, id );
 		if( cargo != null )
 		{
 			return cargo;
@@ -68,14 +74,14 @@ public class CargoLogic {
             return persistence.update(entity);
     }
             
-    public void deleteCargo (Long cargo) throws BusinessLogicException
+    public void deleteCargo ( Long idPolitico, Long id ) throws BusinessLogicException
     {
-        if (persistence.find(cargo) == null)
+        if (getCargo(idPolitico, id) == null)
         {
             throw new BusinessLogicException("No se puede eliminar un cargo que no existe");
         }
         else 
-            persistence.delete(cargo);
+            persistence.delete(id);
     }
             
 }

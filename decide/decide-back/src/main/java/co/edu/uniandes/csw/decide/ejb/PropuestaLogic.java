@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.decide.ejb;
 
+import co.edu.uniandes.csw.decide.entities.PoliticoEntity;
 import co.edu.uniandes.csw.decide.entities.PropuestaEntity;
 import co.edu.uniandes.csw.decide.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.decide.persistence.PropuestaPersistence;
@@ -19,6 +20,9 @@ public class PropuestaLogic {
     
     @Inject
     private PropuestaPersistence persistence;
+    
+    @Inject
+    private PoliticoLogic pol;
     
     /**
      *
@@ -40,16 +44,18 @@ public class PropuestaLogic {
      * Obtener todos los Propuestas existentes en la base de datos.
      * @return una lista de Propuestas.
      */
-    public List<PropuestaEntity> getPropuestas() {
-        return persistence.findAll();
+   public List<PropuestaEntity> getPropuestas(Long politicoId) throws BusinessLogicException
+    {
+            PoliticoEntity politico = pol.getPolitico(politicoId);
+            return politico.getPropuestas();    
     }
     
-    public PropuestaEntity getPropuesta( Long id ) throws BusinessLogicException
+    public PropuestaEntity getPropuesta( Long id, Long idPolitico ) throws BusinessLogicException
 	{
-		PropuestaEntity Propuesta = persistence.find( id );
+		PropuestaEntity Propuesta = persistence.find( id, idPolitico );
 		if( Propuesta != null )
 		{
-			return Propuesta;
+                    return Propuesta;
 		}
                 else
 		throw new BusinessLogicException( String.format( "No existe el Propuesta con el id %s", id ));
@@ -68,14 +74,14 @@ public class PropuestaLogic {
             return persistence.update(entity);
     }
             
-    public void deletePropuesta (Long Propuesta) throws BusinessLogicException
+    public void deletePropuesta (Long propuesta, Long idPolitico) throws BusinessLogicException
     {
-        if (persistence.find(Propuesta) == null)
+        if (getPropuesta(propuesta, idPolitico) == null)
         {
             throw new BusinessLogicException("No se puede eliminar un Propuesta que no existe");
         }
         else 
-            persistence.delete(Propuesta);
+            persistence.delete(propuesta);
     }
     
 }

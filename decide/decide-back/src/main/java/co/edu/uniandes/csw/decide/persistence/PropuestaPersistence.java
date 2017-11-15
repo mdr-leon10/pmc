@@ -72,5 +72,9 @@ public class PropuestaPersistence {
         query.setParameter("propuesta", entity.getName());
         return (PropuestaEntity) query.getSingleResult();
     }
+
+    public PropuestaEntity find(Long id, Long idPolitico) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

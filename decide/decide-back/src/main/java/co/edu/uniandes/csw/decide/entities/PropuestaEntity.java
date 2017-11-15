@@ -46,13 +46,13 @@ public class PropuestaEntity implements Serializable {
         this.name = name;
     }
 
-//    public PoliticoEntity getPolitico() {
-//        return politico;
-//    }
-//
-//    public void setPolitico(PoliticoEntity politico) {
-//        this.politico = politico;
-//    }
+    public PoliticoEntity getPolitico() {
+        return politico;
+    }
+
+    public void setPolitico(PoliticoEntity politico) {
+        this.politico = politico;
+    }
 
     public Integer getNumerales() {
         return numerales;

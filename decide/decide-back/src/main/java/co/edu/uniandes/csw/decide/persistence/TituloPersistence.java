@@ -75,5 +75,9 @@ public class TituloPersistence {
         query.setParameter("universidad", entity.getUniversidad());
         return (TituloEntity) query.getSingleResult();
     }
+
+    public TituloEntity find(Long politicoId, Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.decide.dtos;
 
 import co.edu.uniandes.csw.decide.entities.InvestigacionEntity;
+import co.edu.uniandes.csw.decide.entities.PoliticoEntity;
 
 /**
  *
@@ -17,6 +18,7 @@ public class InvestigacionDTO {
     private String name;
     private String enteInvestigador;
     private String descripcion;
+    private PoliticoDTO politico;
 
     public InvestigacionDTO() {
     }
@@ -26,6 +28,7 @@ public class InvestigacionDTO {
          this.name = e.getName();
          this.enteInvestigador = e.getEnteInvestigador();
          this.descripcion = e.getDescripcion();
+         this.politico = politicoEtoDTO(e.getPolitico());
     }
      
      public InvestigacionEntity toEntity()
@@ -35,9 +38,24 @@ public class InvestigacionDTO {
          e.setName(this.name);
          e.setEnteInvestigador(this.enteInvestigador);
          e.setDescripcion(this.descripcion);
+         e.setPolitico(this.politico.toEntity());
          
          return e;
      }
+     
+     public PoliticoDTO politicoEtoDTO (PoliticoEntity entity)
+    {
+        PoliticoDTO pol = new PoliticoDTO(entity);
+        return pol;
+    }
+
+    public PoliticoDTO getPolitico() {
+        return politico;
+    }
+
+    public void setPolitico(PoliticoDTO politico) {
+        this.politico = politico;
+    }
 
     public Long getId() {
         return id;

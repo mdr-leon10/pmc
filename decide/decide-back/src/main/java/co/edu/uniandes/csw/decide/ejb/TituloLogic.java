@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.decide.ejb;
 
 
+import co.edu.uniandes.csw.decide.entities.PoliticoEntity;
 import co.edu.uniandes.csw.decide.entities.TituloEntity;
 import co.edu.uniandes.csw.decide.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.decide.persistence.TituloPersistence;
@@ -22,39 +23,27 @@ public class TituloLogic {
     @Inject
     private TituloPersistence persistence;
     
-    /**
-     *
-     * @param entity
-     * @return
-     * @throws BusinessLogicException
-     */
+    @Inject private PoliticoLogic pol;
+
+    
+   public List<TituloEntity> getTitulos(Long politicoId) throws BusinessLogicException
+    {
+            PoliticoEntity politico = pol.getPolitico(politicoId);
+            return politico.getTitulos();    
+    }
+    
     public TituloEntity createTitulo(TituloEntity entity) throws BusinessLogicException {
+        
         if (persistence.findByNameAndUniversidad(entity) == null)
         {
             persistence.create(entity);
         }
         else
-            throw new BusinessLogicException("No se puede crear el Titulo " + entity.getName() + " pues este ya existe en la universidad " + entity.getUniversidad());
-        
+            throw new BusinessLogicException("No se puede crear el Titulo " + entity.getName() + "en la universidad " + entity.getUniversidad() + " pues este ya existe");
         return entity;
     }
-
-    /**
-     * Obtener todos los Titulos existentes en la base de datos.
-     * @return una lista de Titulos.
-     */
-    public List<TituloEntity> getTitulos() 
-    {
-        return persistence.findAll();
-    }
     
-    public TituloEntity getTitulo( Long id )
-	{
-		return persistence.find( id );
-			
-	}
-    
-    public TituloEntity updateTitulo (TituloEntity entity, Long id) throws BusinessLogicException
+     public TituloEntity updateTitulo (TituloEntity entity, Long id) throws BusinessLogicException
     {
         TituloEntity TituloActual = persistence.find(id);
         
@@ -66,9 +55,22 @@ public class TituloLogic {
             entity.setId(id);
             return persistence.update(entity);
     }
-            
-    public void deleteTitulo (Long Titulo) throws BusinessLogicException
+     
+    public TituloEntity getTitulo(Long politicoId, Long id) {
+        try
+        {
+            return persistence.find( politicoId, id );
+        }
+        catch(Exception e)
+        {
+            throw new IllegalArgumentException("El Titulo no existe");
+        }
+        
+    }
+    
+    public void deleteTitulo (Long Titulo, Long idPolitico) throws BusinessLogicException
     {
-            persistence.delete(Titulo);
+        TituloEntity viejo = getTitulo(idPolitico, Titulo);
+        persistence.delete(Titulo);
     }
 }

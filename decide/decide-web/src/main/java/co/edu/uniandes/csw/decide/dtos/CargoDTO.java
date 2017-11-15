@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.decide.dtos;
 
 import co.edu.uniandes.csw.decide.entities.CargoEntity;
+import co.edu.uniandes.csw.decide.entities.PoliticoEntity;
 
 /**
  *
@@ -17,6 +18,7 @@ public class CargoDTO {
     private String name;
     private String entidad;
     private Integer tipo;
+    private PoliticoDTO politico;
     
     public CargoDTO()
     {
@@ -31,6 +33,7 @@ public class CargoDTO {
             this.entidad = cargo.getEntidad();
             this.name = cargo.getName();
             this.tipo = cargo.getTipo();
+            this.politico = politicoEtoDTO(cargo.getPolitico());
         }
     }
     
@@ -41,8 +44,24 @@ public class CargoDTO {
         entity.setName(this.name);
         entity.setEntidad(this.entidad);
         entity.setTipo(this.tipo);
+        entity.setPolitico(this.politico.toEntity());
+        
         
         return entity;
+    }
+    
+    public PoliticoDTO politicoEtoDTO (PoliticoEntity entity)
+    {
+        PoliticoDTO pol = new PoliticoDTO(entity);
+        return pol;
+    }
+
+    public PoliticoDTO getPolitico() {
+        return politico;
+    }
+
+    public void setPolitico(PoliticoDTO politico) {
+        this.politico = politico;
     }
 
     public Long getId() {

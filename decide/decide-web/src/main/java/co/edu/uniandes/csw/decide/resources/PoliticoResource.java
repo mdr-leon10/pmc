@@ -8,6 +8,7 @@ import co.edu.uniandes.csw.decide.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.decide.ejb.PoliticoLogic;
 import co.edu.uniandes.csw.decide.entities.PoliticoEntity;
 import co.edu.uniandes.csw.decide.dtos.PoliticoDTO;
+import co.edu.uniandes.csw.decide.entities.CargoEntity;
 import java.util.LinkedList;
 import java.util.List;
 import javax.inject.Inject;
@@ -22,6 +23,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
@@ -123,5 +125,56 @@ public class PoliticoResource {
 		}
 		return list;
 	}
+        
+        @Path("{idPolitico: \\d+}/cargos")
+        public Class<CargoResource> getCargosResource(@PathParam("idPolitico") Long idPolitico) throws BusinessLogicException 
+        {
+            
+            PoliticoEntity entity = logic.getPolitico(idPolitico);
+            
+            if (entity == null)
+            {
+                throw new WebApplicationException("No existe un Politico con el id: " + idPolitico + ".", 404);
+            }
+            
+            return CargoResource.class;
+            
+        }
+        
+        @Path("{idPolitico: \\d+}/investigaciones")
+        public Class<InvestigacionResource> getInvestigacionesResource(@PathParam("idPolitico") Long idPolitico) throws BusinessLogicException 
+        {
+            PoliticoEntity entity = logic.getPolitico(idPolitico);
+                 
+            if (entity == null)
+            {
+                throw new WebApplicationException("No existe un Politico con el id: " + idPolitico + ".", 404);
+            }
+                return InvestigacionResource.class;
+        }
+        
+        @Path("{idPolitico: \\d+}/propuestas")
+        public Class<PropuestaResource> getPropuestaResource(@PathParam("idPolitico") Long idPolitico) throws BusinessLogicException 
+        {
+            PoliticoEntity entity = logic.getPolitico(idPolitico);
+                 
+            if (entity == null)
+            {
+                throw new WebApplicationException("No existe un Politico con el id: " + idPolitico + ".", 404);
+            }
+                return PropuestaResource.class;
+        }
+        
+        @Path("{idPolitico: \\d+}/titulos")
+        public Class<TituloResource> getTituloResource(@PathParam("idPolitico") Long idPolitico) throws BusinessLogicException 
+        {
+            PoliticoEntity entity = logic.getPolitico(idPolitico);
+                 
+            if (entity == null)
+            {
+                throw new WebApplicationException("No existe un Politico con el id: " + idPolitico + ".", 404);
+            }
+                return TituloResource.class;
+        }
     
 }

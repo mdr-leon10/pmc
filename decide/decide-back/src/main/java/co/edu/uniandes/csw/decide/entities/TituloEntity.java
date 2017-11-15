@@ -46,13 +46,13 @@ public class TituloEntity implements Serializable {
         this.name = name;
     }
 
-//    public PoliticoEntity getPolitico() {
-//        return politico;
-//    }
-//
-//    public void setPolitico(PoliticoEntity pilitico) {
-//        this.politico = politico;
-//    }
+    public PoliticoEntity getPolitico() {
+        return politico;
+    }
+
+    public void setPolitico(PoliticoEntity pilitico) {
+        this.politico = politico;
+    }
 
     public String getUniversidad() {
         return universidad;

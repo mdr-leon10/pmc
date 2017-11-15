@@ -48,9 +48,13 @@ public class InvestigacionEntity implements Serializable {
         this.name = name;
     }
 
-//    public void setPolitico(PoliticoEntity politico) {
-//        this.politico = politico;
-//    }  
+    public void setPolitico(PoliticoEntity politico) {
+        this.politico = politico;
+    }  
+
+    public PoliticoEntity getPolitico() {
+        return politico;
+    }
 
     public String getEnteInvestigador() {
         return enteInvestigador;
