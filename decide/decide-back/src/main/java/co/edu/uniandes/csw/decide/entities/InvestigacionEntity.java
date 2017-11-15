@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -22,8 +23,8 @@ public class InvestigacionEntity implements Serializable {
     private String enteInvestigador;
     private String descripcion;
     
-//    @OneToMany (mappedBy = "investigaciones", targetEntity = PoliticoEntity.class)
-//    private PoliticoEntity politico;
+    @ManyToOne
+    private PoliticoEntity politico;
     
     
     @Id

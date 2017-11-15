@@ -32,6 +32,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -45,17 +46,17 @@ public class PoliticoEntity implements Serializable
     private Integer anoNacimiento;
     private String partido;
     
-//    @ManyToOne
-//    private List<CargoEntity> cargosRealizados = new ArrayList<CargoEntity>();
+    @OneToMany (mappedBy = "politico")
+    private List<CargoEntity> cargosRealizados = new ArrayList<CargoEntity>();
     
-//    @ManyToOne
-//    private List<InvestigacionEntity> investigaciones = new ArrayList<InvestigacionEntity>();
-//    
-//    @ManyToOne
-//    private List<PropuestaEntity> propuestas = new ArrayList<PropuestaEntity>();
-//    
-//    @ManyToOne
-//    private List<TituloEntity> titulos = new ArrayList<TituloEntity>();
+    @OneToMany (mappedBy = "politico")
+    private List<InvestigacionEntity> investigaciones = new ArrayList<InvestigacionEntity>();
+    
+    @OneToMany (mappedBy = "politico")
+    private List<PropuestaEntity> propuestas = new ArrayList<PropuestaEntity>();
+    
+    @OneToMany (mappedBy = "politico")
+    private List<TituloEntity> titulos = new ArrayList<TituloEntity>();
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -110,36 +111,36 @@ public class PoliticoEntity implements Serializable
         this.partido = partido;
     }
 
-//    public List<CargoEntity> getCargosRealizados() {
-//        return cargosRealizados;
-//    }
-//
-//    public void setCargosRealizados(List<CargoEntity> cargosRealizados) {
-//        this.cargosRealizados = cargosRealizados;
-//    }
+    public List<CargoEntity> getCargosRealizados() {
+        return cargosRealizados;
+    }
 
-//    public List<InvestigacionEntity> getInvestigaciones() {
-//        return investigaciones;
-//    }
-//
-//    public void setInvestigaciones(List<InvestigacionEntity> investigaciones) {
-//        this.investigaciones = investigaciones;
-//    }
-//
-//    public List<PropuestaEntity> getPropuestas() {
-//        return propuestas;
-//    }
-//
-//    public void setPropuestas(List<PropuestaEntity> propuestas) {
-//        this.propuestas = propuestas;
-//    }
-//
-//    public List<TituloEntity> getTitulos() {
-//        return titulos;
-//    }
-//
-//    public void setTitulos(List<TituloEntity> titulos) {
-//        this.titulos = titulos;
-//    }
+    public void setCargosRealizados(List<CargoEntity> cargosRealizados) {
+        this.cargosRealizados = cargosRealizados;
+    }
+
+    public List<InvestigacionEntity> getInvestigaciones() {
+        return investigaciones;
+    }
+
+    public void setInvestigaciones(List<InvestigacionEntity> investigaciones) {
+        this.investigaciones = investigaciones;
+    }
+
+    public List<PropuestaEntity> getPropuestas() {
+        return propuestas;
+    }
+
+    public void setPropuestas(List<PropuestaEntity> propuestas) {
+        this.propuestas = propuestas;
+    }
+
+    public List<TituloEntity> getTitulos() {
+        return titulos;
+    }
+
+    public void setTitulos(List<TituloEntity> titulos) {
+        this.titulos = titulos;
+    }
    
 }

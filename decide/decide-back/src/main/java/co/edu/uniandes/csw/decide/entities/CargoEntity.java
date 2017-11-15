@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -36,8 +37,8 @@ public class CargoEntity implements Serializable {
     
     private String name;
     
-//    @OneToMany (mappedBy = "cargosRealizados")
-//    private PoliticoEntity politico;
+    @ManyToOne
+    private PoliticoEntity politico;
 
     public Long getId() {
         return id;
@@ -55,13 +56,13 @@ public class CargoEntity implements Serializable {
         this.name = name;
     }
 
-//    public PoliticoEntity getPolitico() {
-//        return politico;
-//    }
-//
-//    public void setPolitico(PoliticoEntity politico) {
-//        this.politico = politico;
-//    }
+    public PoliticoEntity getPolitico() {
+        return politico;
+    }
+
+    public void setPolitico(PoliticoEntity politico) {
+        this.politico = politico;
+    }
     
     public String getEntidad() {
         return entidad;
