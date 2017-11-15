@@ -68,8 +68,8 @@ public class InvestigacionPersistence {
     }
 
     public Object findByName(InvestigacionEntity entity) {
-        TypedQuery query = em.createQuery("select u from InvestigacionEntity u where u.name = Investigacion", InvestigacionEntity.class);
-        query.setParameter("Investigacion", entity.getName());
+        TypedQuery query = em.createQuery("select u from InvestigacionEntity u where u.name = :investigacion", InvestigacionEntity.class);
+        query.setParameter("investigacion", entity.getName());
         return (InvestigacionEntity) query.getSingleResult();
     }
     

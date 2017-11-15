@@ -16,7 +16,6 @@ public class CargoDTO {
     private Long id;
     private String name;
     private String entidad;
-    private String descripcion;
     private Integer tipo;
     
     public CargoDTO()
@@ -29,7 +28,6 @@ public class CargoDTO {
         if (cargo != null)
         {
             this.id = cargo.getId();
-            this.descripcion = cargo.getDescripción();
             this.entidad = cargo.getEntidad();
             this.name = cargo.getName();
             this.tipo = cargo.getTipo();
@@ -42,7 +40,6 @@ public class CargoDTO {
         entity.setId(this.id);
         entity.setName(this.name);
         entity.setEntidad(this.entidad);
-        entity.setDescripción(this.descripcion);
         entity.setTipo(this.tipo);
         
         return entity;
@@ -70,14 +67,6 @@ public class CargoDTO {
 
     public void setEntidad(String entidad) {
         this.entidad = entidad;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
     }
 
     public Integer getTipo() {

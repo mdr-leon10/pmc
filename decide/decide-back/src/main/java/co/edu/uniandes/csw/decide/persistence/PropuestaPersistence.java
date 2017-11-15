@@ -68,8 +68,8 @@ public class PropuestaPersistence {
     }
 
     public Object findByName(PropuestaEntity entity) {
-        TypedQuery query = em.createQuery("select u from PropuestaEntity u where u.name = Propuesta", PropuestaEntity.class);
-        query.setParameter("Propuesta", entity.getName());
+        TypedQuery query = em.createQuery("select u from PropuestaEntity u where u.name = :propuesta", PropuestaEntity.class);
+        query.setParameter("propuesta", entity.getName());
         return (PropuestaEntity) query.getSingleResult();
     }
     

@@ -11,6 +11,7 @@ import co.edu.uniandes.csw.decide.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.decide.persistence.TituloPersistence;
 import java.util.List;
 import javax.inject.Inject;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -28,12 +29,13 @@ public class TituloLogic {
      * @throws BusinessLogicException
      */
     public TituloEntity createTitulo(TituloEntity entity) throws BusinessLogicException {
-        if (persistence.findByName(entity) == null)
+        if (persistence.findByNameAndUniversidad(entity) == null)
         {
             persistence.create(entity);
         }
         else
-            throw new BusinessLogicException("No se puede crear el Titulo " + entity.getName() + " pues este ya existe");
+            throw new BusinessLogicException("No se puede crear el Titulo " + entity.getName() + " pues este ya existe en la universidad " + entity.getUniversidad());
+        
         return entity;
     }
 
@@ -41,19 +43,15 @@ public class TituloLogic {
      * Obtener todos los Titulos existentes en la base de datos.
      * @return una lista de Titulos.
      */
-    public List<TituloEntity> getTitulos() {
+    public List<TituloEntity> getTitulos() 
+    {
         return persistence.findAll();
     }
     
-    public TituloEntity getTitulo( Long id ) throws BusinessLogicException
+    public TituloEntity getTitulo( Long id )
 	{
-		TituloEntity Titulo = persistence.find( id );
-		if( Titulo != null )
-		{
-			return Titulo;
-		}
-                else
-		throw new BusinessLogicException( String.format( "No existe el Titulo con el id %s", id ));
+		return persistence.find( id );
+			
 	}
     
     public TituloEntity updateTitulo (TituloEntity entity, Long id) throws BusinessLogicException
@@ -71,11 +69,6 @@ public class TituloLogic {
             
     public void deleteTitulo (Long Titulo) throws BusinessLogicException
     {
-        if (persistence.find(Titulo) == null)
-        {
-            throw new BusinessLogicException("No se puede eliminar un Titulo que no existe");
-        }
-        else 
             persistence.delete(Titulo);
     }
 }

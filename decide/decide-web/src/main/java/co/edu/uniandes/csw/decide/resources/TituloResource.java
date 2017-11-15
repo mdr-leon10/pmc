@@ -11,6 +11,8 @@ import co.edu.uniandes.csw.decide.entities.TituloEntity;
 import co.edu.uniandes.csw.decide.exceptions.BusinessLogicException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -23,8 +25,10 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -49,9 +53,16 @@ public class TituloResource {
 	 * @throws BusinessLogicException Si no cumple con los requisitos mínimos para su creación. (400 BAD REQUEST)
 	 */
 	@POST
-	public TituloDTO createTitulo( TituloDTO dto ) throws BusinessLogicException
+	public TituloDTO createTitulo( TituloDTO dto ) throws WebApplicationException
 	{
-		return new TituloDTO( logic.createTitulo( dto.toEntity( ) ) );
+            try
+            {
+                return new TituloDTO( logic.createTitulo( dto.toEntity( ) ) );
+            }
+            catch (BusinessLogicException ex){
+                throw new WebApplicationException(ex.getMessage(), Response.Status.BAD_REQUEST);
+            }
+                    
 	}
 	
 	/**
@@ -74,9 +85,14 @@ public class TituloResource {
 	 */
 	@GET
 	@Path( "{id: \\d+}" )
-	public TituloDTO getTitulo( @PathParam( "id" ) Long id ) throws BusinessLogicException
+	public TituloDTO getTitulo( @PathParam( "id" ) Long id ) throws WebApplicationException
 	{
-		return new TituloDTO( logic.getTitulo( id ) );
+            TituloEntity e = logic.getTitulo(id);
+            if (e == null)
+            {
+                throw new WebApplicationException("No se encontró un título con esa información" , Response.Status.NOT_FOUND);
+            }
+            return new TituloDTO( logic.getTitulo( id ) );
 	}
 	
 	/**
@@ -89,11 +105,23 @@ public class TituloResource {
 	 */
 	@PUT
 	@Path( "{id: \\d+}" )
-	public TituloDTO updateTitulo( @PathParam( "id" ) Long id, TituloDTO dto ) throws BusinessLogicException
+	public TituloDTO updateTitulo( @PathParam( "id" ) Long id, TituloDTO dto ) throws WebApplicationException
 	{
-                
+            if(logic.getTitulo(id) != null)
+            {
             TituloEntity entity = dto.toEntity();
-            return new TituloDTO (logic.updateTitulo( entity, id ));
+                try 
+                {
+                    return new TituloDTO (logic.updateTitulo( entity, id ));
+                } 
+                catch (BusinessLogicException ex) 
+                {
+                    throw new WebApplicationException(ex.getMessage(), Response.Status.METHOD_NOT_ALLOWED);
+                }
+            }
+            else
+                throw new WebApplicationException("No se puede actualizar un título que no existe", Response.Status.FORBIDDEN);
+            
 	}
 	
 	/**
@@ -105,7 +133,12 @@ public class TituloResource {
 	@Path( "{id: \\d+}" )
 	public void deleteTitulo( @PathParam( "id" ) Long id ) throws BusinessLogicException
 	{
-                logic.deleteTitulo( id );
+            if (logic.getTitulo(id) == null)
+            {
+                throw new WebApplicationException("No se puede eliminar un título que no existe", Response.Status.BAD_REQUEST);
+            }
+            else
+            logic.deleteTitulo( id );
 	}
 	
 	/**

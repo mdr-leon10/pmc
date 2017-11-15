@@ -25,16 +25,58 @@ package co.edu.uniandes.csw.decide.entities;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author ISIS2603
  */
 @Entity
-public class PoliticoEntity extends BaseEntity implements Serializable 
+public class PoliticoEntity implements Serializable 
 {
     private Long cedula;
+    private String ciudadNacimiento;
+    private Integer anoNacimiento;
+    private String partido;
+    
+//    @ManyToOne
+//    private List<CargoEntity> cargosRealizados = new ArrayList<CargoEntity>();
+    
+//    @ManyToOne
+//    private List<InvestigacionEntity> investigaciones = new ArrayList<InvestigacionEntity>();
+//    
+//    @ManyToOne
+//    private List<PropuestaEntity> propuestas = new ArrayList<PropuestaEntity>();
+//    
+//    @ManyToOne
+//    private List<TituloEntity> titulos = new ArrayList<TituloEntity>();
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Long getCedula() {
         return cedula;
@@ -43,4 +85,61 @@ public class PoliticoEntity extends BaseEntity implements Serializable
     public void setCedula(Long cedula) {
         this.cedula = cedula;
     }
+
+    public String getCiudadNacimiento() {
+        return ciudadNacimiento;
+    }
+
+    public void setCiudadNacimiento(String ciudadNacimiento) {
+        this.ciudadNacimiento = ciudadNacimiento;
+    }
+
+    public Integer getAnoNacimiento() {
+        return anoNacimiento;
+    }
+
+    public void setAnoNacimiento(Integer anoNacimiento) {
+        this.anoNacimiento = anoNacimiento;
+    }
+
+    public String getPartido() {
+        return partido;
+    }
+
+    public void setPartido(String partido) {
+        this.partido = partido;
+    }
+
+//    public List<CargoEntity> getCargosRealizados() {
+//        return cargosRealizados;
+//    }
+//
+//    public void setCargosRealizados(List<CargoEntity> cargosRealizados) {
+//        this.cargosRealizados = cargosRealizados;
+//    }
+
+//    public List<InvestigacionEntity> getInvestigaciones() {
+//        return investigaciones;
+//    }
+//
+//    public void setInvestigaciones(List<InvestigacionEntity> investigaciones) {
+//        this.investigaciones = investigaciones;
+//    }
+//
+//    public List<PropuestaEntity> getPropuestas() {
+//        return propuestas;
+//    }
+//
+//    public void setPropuestas(List<PropuestaEntity> propuestas) {
+//        this.propuestas = propuestas;
+//    }
+//
+//    public List<TituloEntity> getTitulos() {
+//        return titulos;
+//    }
+//
+//    public void setTitulos(List<TituloEntity> titulos) {
+//        this.titulos = titulos;
+//    }
+   
 }

@@ -68,8 +68,8 @@ public class PoliticoPersistence {
     }
 
     public Object findByName(PoliticoEntity entity) {
-        TypedQuery query = em.createQuery("select u from PoliticoEntity u where u.name = Politico", PoliticoEntity.class);
-        query.setParameter("Politico", entity.getName());
+        TypedQuery query = em.createQuery("select u from PoliticoEntity u where u.name = :politico", PoliticoEntity.class);
+        query.setParameter("politico", entity.getName());
         return (PoliticoEntity) query.getSingleResult();
     }
     

@@ -7,13 +7,17 @@ package co.edu.uniandes.csw.decide.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author mdr.leon10
  */
 @Entity
-public class CargoEntity extends BaseEntity implements Serializable {
+public class CargoEntity implements Serializable {
     
     public static final Integer PRIVADO = 1;
     public static final Integer JUDICIAL = 2;
@@ -22,27 +26,49 @@ public class CargoEntity extends BaseEntity implements Serializable {
     
     //Nombre de la entidad en la que obtuvo la experiencia.
     private String entidad;
-    
-    //Descripción del cargo en el que obtuvo la experiencia.
-    private String descripción;
-   
+       
     //Atributo para el tipo de experiencia, publica o privada.
     private Integer tipo;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    private String name;
+    
+//    @OneToMany (mappedBy = "cargosRealizados")
+//    private PoliticoEntity politico;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+//    public PoliticoEntity getPolitico() {
+//        return politico;
+//    }
+//
+//    public void setPolitico(PoliticoEntity politico) {
+//        this.politico = politico;
+//    }
+    
     public String getEntidad() {
         return entidad;
     }
 
     public void setEntidad(String entidad) {
         this.entidad = entidad;
-    }
-
-    public String getDescripción() {
-        return descripción;
-    }
-
-    public void setDescripción(String descripción) {
-        this.descripción = descripción;
     }
 
     public Integer getTipo() {

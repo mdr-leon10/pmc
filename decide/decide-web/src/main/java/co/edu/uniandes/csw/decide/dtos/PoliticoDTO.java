@@ -16,6 +16,9 @@ public class PoliticoDTO {
     private Long id;
     private String name;
     private Long cedula;
+    private String ciudadNacimiento;
+    private Integer anoNacimiento;
+    private String partido;
 
     public PoliticoDTO() {
     }
@@ -25,6 +28,9 @@ public class PoliticoDTO {
         this.id = e.getId();
         this.name = e.getName();
         this.cedula = e.getCedula();
+        this.ciudadNacimiento = e.getCiudadNacimiento();
+        this.anoNacimiento = e.getAnoNacimiento();
+        this.partido = e.getPartido();
     }
     
     public PoliticoEntity toEntity()
@@ -33,6 +39,9 @@ public class PoliticoDTO {
         e.setId(this.id);
         e.setCedula(this.cedula);
         e.setName(this.name);
+        e.setAnoNacimiento(this.anoNacimiento);
+        e.setCiudadNacimiento(this.ciudadNacimiento);
+        e.setPartido(this.partido);
         
         return e;
     }
@@ -59,6 +68,30 @@ public class PoliticoDTO {
 
     public void setCedula(Long cedula) {
         this.cedula = cedula;
+    }
+
+    public String getCiudadNacimiento() {
+        return ciudadNacimiento;
+    }
+
+    public void setCiudadNacimiento(String ciudadNacimiento) {
+        this.ciudadNacimiento = ciudadNacimiento;
+    }
+
+    public Integer getAnoNacimiento() {
+        return anoNacimiento;
+    }
+
+    public void setAnoNacimiento(Integer anoNacimiento) {
+        this.anoNacimiento = anoNacimiento;
+    }
+
+    public String getPartido() {
+        return partido;
+    }
+
+    public void setPartido(String partido) {
+        this.partido = partido;
     }
     
     

@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.csw.decide.persistence;
 
-import co.edu.uniandes.csw.decide.entities.IdiomaEntity;
 import co.edu.uniandes.csw.decide.entities.TituloEntity;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -55,7 +54,9 @@ public class TituloPersistence {
      * @param id: id correspondiente al Titulo buscado.
      * @return un Titulo.
      */
-    public TituloEntity find(Long id) {
+    public TituloEntity find(Long id) 
+    {
+        
             return em.find(TituloEntity.class, id);
     }
 
@@ -68,9 +69,10 @@ public class TituloPersistence {
        return query.getResultList();
     }
 
-    public Object findByName(TituloEntity entity) {
-        TypedQuery query = em.createQuery("select u from TituloEntity u where u.name = Titulo", TituloEntity.class);
-        query.setParameter("Titulo", entity.getName());
+    public Object findByNameAndUniversidad(TituloEntity entity) {
+        TypedQuery query = em.createQuery("select u from TituloEntity u where u.name = :titulo and u.universidad = :universidad", TituloEntity.class);
+        query.setParameter("titulo", entity.getName());
+        query.setParameter("universidad", entity.getUniversidad());
         return (TituloEntity) query.getSingleResult();
     }
     
