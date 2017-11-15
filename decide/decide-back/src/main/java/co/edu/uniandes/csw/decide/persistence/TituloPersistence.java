@@ -77,7 +77,11 @@ public class TituloPersistence {
     }
 
     public TituloEntity find(Long politicoId, Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        TypedQuery<TituloEntity> q = em.createQuery("select p from TituloEntity p where (p.politico.id = :politicoid) and (p.id = :id)", TituloEntity.class);
+        q.setParameter("politicoid", politicoId);
+        q.setParameter("id", id);
+        return q.getSingleResult();
     }
     
 }

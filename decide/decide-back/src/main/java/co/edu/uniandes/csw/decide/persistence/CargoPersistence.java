@@ -79,7 +79,10 @@ public class CargoPersistence {
     }
 
     public CargoEntity find(Long idPolitico, Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<CargoEntity> q = em.createQuery("select p from CargoEntity p where (p.politico.id = :politicoid) and (p.id = :id)", CargoEntity.class);
+        q.setParameter("politicoid", idPolitico);
+        q.setParameter("id", id);
+        return q.getSingleResult();
     }
     
 }

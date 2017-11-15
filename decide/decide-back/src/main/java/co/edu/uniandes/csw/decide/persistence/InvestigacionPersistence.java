@@ -74,7 +74,10 @@ public class InvestigacionPersistence {
     }
 
     public InvestigacionEntity find(Long id, Long politicoId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       TypedQuery<InvestigacionEntity> q = em.createQuery("select p from InvestigacionEntity p where (p.politico.id = :politicoid) and (p.id = :id)", InvestigacionEntity.class);
+        q.setParameter("politicoid", politicoId);
+        q.setParameter("id", id);
+        return q.getSingleResult();
     }
     
 }
