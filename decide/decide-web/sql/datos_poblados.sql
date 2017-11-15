@@ -20,6 +20,7 @@ insert into cargoentity values (3, 'U. Nal de Manizalez', 'Profesor', 4, 1);
 insert into cargoentity values (4, 'Dpto de Caldas', 'Candidato Gobernación', 4, 1);
 insert into cargoentity values (5, 'Congreso de la Rep.', 'Senador 2002', 3, 1);
 insert into cargoentity values (6, 'Congreso de la Rep.', 'Senador 2006', 3, 1);
+INSERT INTO TITULOENTITY VALUES (110, 'Arquitecto', 'Universidad de los Andes', 1);
 
 -- Alejandro O.
 INSERT INTO POLITICOENTITY VALUES (2, 1955, 87063785, 'Bucaramanga', 'Alejandro Ordoñez Maldonado', 'Conservador');
@@ -27,6 +28,8 @@ insert into cargoentity values (10, 'Municipio de Bucaramanga', 'Concejal', 4, 2
 insert into cargoentity values (11, 'Tribunal Administrativo de Santander', 'Magistrado', 2, 2);
 insert into cargoentity values (12, 'Consejo de Estado de Colombia', 'Presidente Consejo de Estado', 2, 2);
 insert into cargoentity values (13, 'Procuraduría general de la Nación', 'Procurador General', 4, 2);
+INSERT INTO TITULOENTITY VALUES (102, 'Abogado', 'Universidad Santo Tomás de Bucaramanga', 2);
+
 
 -- Clara Eugenia
 INSERT INTO POLITICOENTITY VALUES (3, 1950, 41481937, 'Bogotá', 'Clara Eugenia López Obregón', 'Polo Democrático');
@@ -37,6 +40,9 @@ insert into cargoentity values (23, 'Bogotá D.C.', 'Candidata Alcaldía', 4, 3)
 insert into cargoentity values (24, 'Bogotá D.C.', 'Candidata Cámara de Rep.', 3, 3);
 insert into cargoentity values (25, 'Bogotá D.C.', 'Alcalde encargada', 4, 3);
 insert into cargoentity values (26, 'República de Colombia', 'Ministra de Trabajo', 4, 3);
+INSERT INTO TITULOENTITY VALUES (90, 'Economista', 'llUniversidad de Harvarde', 3);
+INSERT INTO TITULOENTITY VALUES (91, 'Abogada', 'Universidad de los Andes', 3);
+
 
 -- German Vargas Lleras
 INSERT INTO POLITICOENTITY VALUES (4, 1962, 87063785, 'Bucaramanga', 'Germán Vargas Lleras', 'Cambio Radical ');
@@ -46,22 +52,36 @@ insert into cargoentity values (33, 'Congreso de la republica', 'Senador', 3, 4)
 insert into cargoentity values (34, 'Presidencia de la republica', 'Candidato a la presidencia', 4, 4);
 insert into cargoentity values (35, 'Republica de Colombia', 'Ministro de interior y justicia', 4, 4);
 insert into cargoentity values (36, 'Republica de Colombia', 'Vice presidente', 4, 4);
+INSERT INTO TITULOENTITY VALUES (80, 'Abogado ', 'Universidad del rosario', 4);
+INSERT INTO TITULOENTITY VALUES (81, 'Gobierno y Universidad Complutense de Madrid pública', 'lle', 4);
 
 -- Sergio Fajardo
 INSERT INTO POLITICOENTITY VALUES (5, 1956, 0, 'Medillin', 'Sergio Fajardo', 'Firmas');
 insert into cargoentity values (40, 'Colsiencias', 'Miembo del consejo nacional de ciencias basicas', 4, 5);
 insert into cargoentity values (41, 'Departamento de Antioquia', 'Alcalde de medellin', 4, 5);
 insert into cargoentity values (42, 'Universidad de los Andes', 'Director del departamento de matematicas', 4, 5);
+INSERT INTO TITULOENTITY VALUES (70, 'Matematico', 'Universidad de los Andes', 5);
+INSERT INTO TITULOENTITY VALUES (71, 'Master of science y Ph.D en matematicas', 'Master of science y Ph.D en matematicas', 5);
+
+
 
 -- Gustavo Petro
 INSERT INTO POLITICOENTITY VALUES (6, 1960, 0, 'Ciénaga de Oro', 'Gustavo Petro', 'Progresistas');
 insert into cargoentity values (50, 'Congreso de la republica', 'Senador', 3, 6);
 insert into cargoentity values (51, 'Alcaldia de Bogotá', 'Alcalde de Bogota', 4, 6);
+INSERT INTO TITULOENTITY VALUES (60, 'Economista', 'Externado', 6);
+INSERT INTO TITULOENTITY VALUES (61, 'Especialización en Administración pública ', 'Externado', 6);
+INSERT INTO TITULOENTITY VALUES (62, 'Doctorado en Nuevas Tendencias en Administración de Empresas', 'Universidad de Salamanca en España.', 6);
+INSERT INTO TITULOENTITY VALUES (63, 'Maestria en economia', 'Universidad Javeriana ', 6);
 
 -- Roy Barreras
 INSERT INTO POLITICOENTITY VALUES (7, 1963, 0, 'Cali', 'Roy Barreras ', 'Partido de la U');
 insert into cargoentity values (60, 'Congreso de la republica ', 'Senador', 3, 7);
 insert into cargoentity values (61, 'Congreso de la republica ', 'Presidente del senado', 3, 7);into cargoentity values (60, 'aa', 'aa', 4, 7);
+INSERT INTO TITULOENTITY VALUES (50, 'Sociología', 'Universidad del valle', 7);
+INSERT INTO TITULOENTITY VALUES (51,'Derecho', 'Universidad del Rosario', 7);
+INSERT INTO TITULOENTITY VALUES (52,'Literatura', 'Universidad de Barcelona', 7);
+INSERT INTO TITULOENTITY VALUES (53,'Médicina y cirugia ', 'Nacional', 7);
 
 -- Maria del Rosario
 INSERT INTO POLITICOENTITY VALUES (8, 1955, 51636557, 'Sincelejo', 'Maria del Rosario Guerra', 'Centro Democratico');
@@ -69,6 +89,9 @@ insert into cargoentity values (70, 'Congreso de la Republica', 'Senadora', 3, 8
 insert into cargoentity values (71, 'Ministerio de las TIC', 'Ministra de Tecnologias de la información y las comunicaciones de Colombia', 4, 8);
 insert into cargoentity values (72, 'Fondo Financiero de proyectos de desarrollo', 'Directora', 4, 8);
 INSERT INTO PROPUESTAENTITY VALUES (1, 'Propuestas', 10, 8);
+INSERT INTO TITULOENTITY VALUES (40,'Economia', 'Universidad del Rosario', 8);
+INSERT INTO TITULOENTITY VALUES (41,'Administracion publica', 'Hardvard', 8);
+INSERT INTO TITULOENTITY VALUES (42,'Economia Agricola', 'Universidad Cornell', 8);
 
 -- Carlos Holmes
 INSERT INTO POLITICOENTITY VALUES (9, 1951, 0, 'Cartago', 'Carlos Holmes Trujillo', 'Centro Democratico');
@@ -80,6 +103,8 @@ insert into cargoentity values (85, 'Embajador ante la ONU', 'Embajador', 4, 9);
 insert into cargoentity values (86, 'Ministerio de Educación nacional', 'Ministro de educación', 4, 9);
 insert into cargoentity values (87, 'Ministerio del interior', 'Ministro del interior', 4, 9);
 insert into cargoentity values (88, 'Ministerio de delegatorio de funciones presidenciales', 'Ministro Delegatorio de funciones presidenciales', 4, 9);
+INSERT INTO TITULOENTITY VALUES (30,'Derecho', 'Universidad del Cauca', 9);
+INSERT INTO TITULOENTITY VALUES (31, 'Negocios internacionales', 'Universidad de Sofía', 9);
 
 -- Paloma Susana
 INSERT INTO POLITICOENTITY VALUES (10, 1978, 25280205, 'Popayan', 'Paloma Susana Valencia Laserna', 'Centro Democratico');
@@ -89,6 +114,9 @@ insert into cargoentity values (92, 'Blu Radio', 'Analista Politica', 1, 10);
 insert into cargoentity values (93, 'La otra esquina', 'Fundadora', 1, 10);
 insert into cargoentity values (94, 'Congreso de la Republica', 'Senadora', 3, 10);
 insert into cargoentity values (95, 'La hora de la verdad', 'Analista Politica', 1, 10);
+INSERT INTO TITULOENTITY VALUES (20,'Derecho', 'Uniandes', 10);
+INSERT INTO TITULOENTITY VALUES (21, 'Filosofia', 'Uniandes', 10);
+INSERT INTO TITULOENTITY VALUES (22,'Maestria escritura creativa', 'Universidad de Nueva York', 10);
 
 -- Claudia Lopez
 INSERT INTO POLITICOENTITY VALUES (11, 1970, 51992648, 'Bogotá', 'Claudia Nayibe Lopez Hernandez', 'Partido alianza verde');
@@ -113,6 +141,9 @@ INSERT INTO PROPUESTAENTITY VALUES (8,'Camos a gobernar con nuestros 7 mandatos 
 INSERT INTO PROPUESTAENTITY VALUES (9,'Todos protegemos y creemos en nuestra casa comun', 1, 11);
 INSERT INTO PROPUESTAENTITY VALUES (10,'Todos estudiamos, todos trabajamos, todos ahorramos para la vejez', 1, 11);
 INSERT INTO PROPUESTAENTITY VALUES (11,'Todos ponen todos toman', 1, 11);
+INSERT INTO TITULOENTITY VALUES (10,'Doctorado en ciencia política', 'Northwestern University', 11);
+INSERT INTO TITULOENTITY VALUES (11, 'Master en administración pública, contratación el Política Urbana', 'Columbia University', 11);
+INSERT INTO TITULOENTITY VALUES (12,'Finanzas y relaciones internacionales', 'Universidad externado de Colombia', 11);
 
 -- Ivan Duque
 INSERT INTO POLITICOENTITY VALUES (12, 1976, 79940745, 'Bogotá', 'Iván Duque Márquez', 'Centro Democratico');
@@ -142,7 +173,10 @@ INSERT INTO PROPUESTAENTITY VALUES (29,'Felicidad', 2, 12);
 INSERT INTO PROPUESTAENTITY VALUES (30,'Transparencia', 1, 12);
 INSERT INTO PROPUESTAENTITY VALUES (31,'Participación', 1, 12);
 INSERT INTO PROPUESTAENTITY VALUES (32,'Contra la corrupción', 14, 12);
-
+INSERT INTO TITULOENTITY VALUES (1,'Mpm, public management and public policy', 'Georgetown University', 12);
+INSERT INTO TITULOENTITY VALUES (2, 'LLM, International Business Law', 'American University', 12);
+INSERT INTO TITULOENTITY VALUES (3,'Executive Education, Private Equite and Venture Capitale', 'Hardvard Business School', 12);
+INSERT INTO TITULOENTITY VALUES (4,'Derecho', 'Universidad Sergio Arboleda', 12);
 
 
 
